@@ -9,8 +9,7 @@ const Navbar = () => {
   const fetchUser = async () => {
     try {
       const res = await axios.get("https://video-conference-application-2-backend.onrender.com/auth/user", {
-        withCredentials: true, // ✅ Required for cookies
-      });
+        withCredentials: true});
       setCurrUser(res.data); // ✅ Set user state
     } catch (error) {
       if (error.response && error.response.status === 401) {
