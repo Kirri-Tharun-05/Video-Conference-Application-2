@@ -11,7 +11,7 @@ const signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post(`https://video-conference-application-2-backend.onrender.com`, {
+      const result = await axios.post(`https://video-conference-application-2-backend.onrender.com/signin`, {
         username, password
       },{withCredentials:true});
       console.log('Response :', result.data);
