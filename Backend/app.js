@@ -28,7 +28,8 @@ main()
   .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/videocall');
+  await mongoose.connect(process.env.MONGO_URL);
+  // await mongoose.connect('mongodb://127.0.0.1:27017/videocall');
 }
 
 app.use(express.json()); // ✅ Parses JSON data
@@ -39,7 +40,7 @@ const sessionOptions = ({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: 'mongodb://localhost:27017/videocall',
+    mongoUrl: process.env.MONGO_URL,
     collectionName: 'sessions'
   }),
   cookie: {
