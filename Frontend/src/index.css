@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+
+
+:root {
+  font-family: "Iansui", cursive;
+  font-style: normal;
+  /* font-family: 'Poppins', sans-serif; */
+  color-scheme: dark;
+}
+
+.meetVideoContainer {
+  position: relative;
+  align-items: center;
+  min-height: 80vh;
+  background-color: rgb(8, 8, 64);
+  margin-bottom: 5rem;
+}
+
+.meetUserContainer {
+  position: absolute;
+  bottom: 10vh;
+  height: 25vh;
+  width: auto;
+  border-radius: 1rem;
+  right: 1rem;
+}
+
+.shift-left {
+  left: 10px;
+}
+
+.call {
+  width: auto;
+  height: 3rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+.mic {
+  filter: invert();
+}
+
+.newmessages {
+  color: white;
+}
+
+
+.chat {
+  position: relative;
+  display: inline-block;
+}
+
+.new-message {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  /* Ensures it stays above the icon */
+}
+
+/* .conferenceContainer{
+  min-width:5rem ;
+  padding: 1rem;
+}
+.conferenceContainer video{
+  border-radius:1rem ;
+} */
+
+.chatTitle{
+  height: 10%;
+}
+
+.chatMessages{
+  height: 60vh;
+  overflow-y:auto;
+  padding-right: 5px;
+}
+.chatInputBox{
+  padding: 0.5rem 0;
+}
+
+.chatMessages::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+.chatMessages::-webkit-scrollbar-track {
+  background-color: black;
+  border-radius: 1rem;
+}
+
+.chatMessages::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8a2387, #e94057, #f27121);
+  border-radius: 1rem;
+  border: 3.2px solid transparent;
+  background-clip: content-box;
+}
+
+.chatMessages::-webkit-scrollbar-thumb:active {
+  background-color: yellow;
+}
+
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+::-webkit-scrollbar-track {
+  background-color: black;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8a2387, #e94057, #f27121);
+  border-radius: 1rem;
+  border: 3.2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: yellow;
+}
+
+.Chat-Bar {
+  z-index: 1;
+  position: absolute;
+  /* width: 17vw; */
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+  background-color: white;
+  height: 73vh;
+  right: 0;
+  top: 0;
+  text-align: center;
+  padding: 5px;
+  box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+
+.hide {
+  transform: translateX(20rem);
+}
+
+/* Visible State (Slide In) */
+.show {
+  transform: translateX(0);
+}
+
+.Chat-Bar input {
+  border: 2px solid rgba(128, 128, 128, 0.5);
+  color: black;
+  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
+  width: 70%;
+  transition: all 0.15s ease-in-out;
+  transform: scale(0.97);
+}
+
+.Chat-Bar input:focus {
+  outline: 0;
+  transform: scale(1);
+  border: 2px solid rgba(128, 128, 128);
+  border-radius: 5px;
+}
+
+.Chat-Bar button {
+  background-color: black;
+  padding: 0.5rem;
+  color: white;
+  border-radius: 0.2rem;
+  transition: all 0.1s ease-in-out;
+}
+
+.Chat-Bar button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.getStarted {
+  font-size: larger;
+  font-weight: 500;
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  width: fit-content;
+}
+
+.content {
+  z-index: 1;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+  margin: 1rem;
+  height: auto;
+}
+
+.expand {
+  width: 100%;
+  /* Ensures it takes the full width of the parent */
+  max-width: 30rem;
+  /* Prevents it from getting too wide */
+  overflow-wrap: break-word;
+}
+
+.texttitle {
+  display: flex;
+  justify-content: center;
+}
+
+.roomContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.roomId {
+  background-color: white;
+  color: black;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  border: 3px solid gray;
+  padding: 0.5rem 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  width: 13rem;
+}
+
+.roomId::placeholder {
+  font-weight: 800;
+  color: gray;
+  opacity: 1;
+}
+
+.animation {
+  height: 30rem;
+}
+
+.history {
+  display: flex;
+  height: 85vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.historyList {
+  overflow-y: auto;
+  height: 80%;
+  padding-right: 5px;
+}
+
+.historyList::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+.historyList::-webkit-scrollbar-track {
+  background-color: black;
+  border-radius: 1rem;
+}
+
+.historyList::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8a2387, #e94057, #f27121);
+  border-radius: 1rem;
+  border: 3.2px solid transparent;
+  background-clip: content-box;
+}
+
+.historyList::-webkit-scrollbar-thumb:active {
+  background-color: yellow;
+}
+
+.join {
+  background: linear-gradient(90deg, #8a2387, #e94057, #f27121);
+  font-weight: 900;
+  color: white;
+  transform: scale(90%);
+}
+
+.join:hover {
+  transform: scale(100%);
+}
+
+.historyBtn {
+  transform: scale(95%);
+  transition: 0.15s transform ease-in-out;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  font-weight: 900;
+}
+
+.historyBtn:hover {
+  transform: scale(100%);
+}
+
+@media (max-width: 480px) {
+  .min-video {
+    height: 10vh;
+  }
+
+  .meetVideoContainer {
+    align-items: center;
+  }
+
+  .max-video {
+    height: 15vh;
+  }
+
+  .call {
+    height: 2.5rem;
+  }
+
+  .buttons {
+    gap: 1.3rem;
+  }
+}
+
+@media(min-width:600px) {
+  .meetUserContainer {
+    height: 16vh;
+  }
+}

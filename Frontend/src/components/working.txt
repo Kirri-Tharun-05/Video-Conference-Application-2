@@ -1,0 +1,63 @@
+Working of ICE protocol in Lobby
+
+How ICE Works in Your Code (Simplified)
+ICE (Interactive Connectivity Establishment) is a WebRTC protocol that helps find the best way to connect two users (peer-to-peer). It discovers possible network paths using ICE candidates.
+
+What Happens in Your Code?
+
+
+1 . A new user joins the call:
+
+The user-joined event fires when a user joins.
+A new WebRTC connection (RTCPeerConnection) is created for that user.
+
+
+2. ICE Candidate Gathering Starts:
+
+When a new RTCPeerConnection is created, it automatically starts searching for ICE candidates (possible network paths).
+
+As soon as an ICE candidate is found, the onicecandidate event fires (which means an ICE candidate is ready).
+
+3. ICE Candidate is Sent to Other Users:
+
+Each time onicecandidate fires, the candidate is sent to the signaling server:
+javascript
+
+connections[socketListId].onicecandidate = (event) => {
+    if (event.candidate !== null) {
+        socketRef.current.emit('signal', socketListId, JSON.stringify({ 'ice': event.candidate }));
+    }
+};
+This sends the ICE candidate to the signaling server, which then forwards it to other users.
+
+4. Receiving ICE Candidates:
+
+Other users receive the ICE candidate from the signaling server.
+They add it to their WebRTC connection using:
+
+connections[fromId].addIceCandidate(new RTCIceCandidate(signal.ice)).catch(e => { console.log(e) });
+This helps establish a direct connection between peers.
+
+What Does "Fire" Mean?
+When we say "the event fires", it means that the event automatically gets triggered when something happens.
+
+📌 Example:
+
+"onicecandidate fires" → means WebRTC has found an ICE candidate, and onicecandidate gets called.
+Summary (Super Simple)
+✅ ICE helps users find the best way to connect.
+✅ WebRTC gathers ICE candidates (possible network paths).
+✅ When an ICE candidate is found, onicecandidate fires (triggers).
+✅ The candidate is sent to other users via the signaling server.
+✅ Other users add the candidate to establish a direct connection.
+
+
+
+
+Working of Silence ()
+
+1. Creates an AudioContext → Manages and processes audio.
+2. Creates an OscillatorNode → Generates a continuous tone.
+3. Connects the oscillator to a MediaStreamDestination → Converts it into a usable media stream.
+4. Starts the oscillator & resumes the context → The oscillator starts producing sound.
+5. Returns an audio track but disables it (enabled: false) → The track is technically present but silent.

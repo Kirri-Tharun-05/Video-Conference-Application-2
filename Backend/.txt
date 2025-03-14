@@ -1,0 +1,1 @@
+mongoDb server url: mongodb+srv://tharunprajitha2023:videocallplatform@video-call-platform.waknj.mongodb.net/?retryWrites=true&w=majority&appName=Video-call-platform
