@@ -46,7 +46,9 @@ const sessionOptions = ({
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true
+    httpOnly: true,
+    secure: true, // Use secure cookies for HTTPS
+    sameSite: "none",
   }
 });
 
@@ -96,19 +98,38 @@ app.post('/signin', async (req, res) => {
   }
 })
 
+// app.post('/login', (req, res, next) => {
+//   passport.authenticate('local', (err, user) => {
+//     if (err) return next(err);
+//     if (!user) {  // If authentication fails
+//       return res.status(httpStatus.status.UNAUTHORIZED).json({ message: "Invalid credentials" });
+//     }
+//     req.logIn(user, (err) => {
+//       if (err) return next(err);
+//       return res.status(httpStatus.status.OK).json({ message: "Successfully Logged In", user });
+//     });
+//   })(req, res, next);
+// });
 app.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     if (err) return next(err);
     if (!user) {  // If authentication fails
-      return res.status(httpStatus.status.UNAUTHORIZED).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
     req.logIn(user, (err) => {
       if (err) return next(err);
-      return res.status(httpStatus.status.OK).json({ message: "Successfully Logged In", user });
+      
+      // ✅ Explicitly set the session cookie
+      res.cookie("connect.sid", req.sessionID, {
+        httpOnly: true,
+        secure: true,  // Use 'true' if your server uses HTTPS
+        sameSite: "none",  // Allows cross-site cookies
+      });
+
+      return res.status(200).json({ message: "Successfully Logged In", user });
     });
   })(req, res, next);
 });
-
 
 app.get("/api/user", async (req, res) => {
   console.log("🔥 `/api/user` route triggered!");
