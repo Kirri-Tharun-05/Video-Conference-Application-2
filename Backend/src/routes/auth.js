@@ -3,9 +3,10 @@ const passport = require("passport");
 const CLIENT_URL = "https://video-conference-application-2.onrender.com/home";
 const User= require('../models/user');
 
+
 router.get('/user',(req,res)=>{
   // console.log('inside auth.js /user req: ',req);
-  console.log('inside auth.js /user req: ',req.user);
+  console.log('inside auth.js /user req: ',req.passport.user);
     if(req.user){
       console.log('inside auth.js')
       console.log(req.user);
