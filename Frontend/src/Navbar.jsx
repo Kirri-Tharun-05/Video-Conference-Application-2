@@ -25,10 +25,10 @@ const Navbar = () => {
   //   fetchUser();
   // }, []);
 
-  useEffect(() => {
-    window.addEventListener("userLoggedIn", fetchUser);
-    return () => window.removeEventListener("userLoggedIn", fetchUser);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("userLoggedIn", fetchUser);
+  //   return () => window.removeEventListener("userLoggedIn", fetchUser);
+  // }, []);
 
   const handleHistory = ()=>{
     navigate('/history');
