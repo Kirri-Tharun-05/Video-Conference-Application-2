@@ -3,26 +3,29 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 const Login = () => {
-  const [username,setUsername]=useState('');
-  const [password,setPassword]=useState('');
-  
-  const navigate=useNavigate();
-  const handleSubmit= async(e)=>{
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      const result= await axios.post('https://video-conference-application-2-backend.onrender.com/login',{
-        username,password },{ withCredentials: true })
-      console.log(result);
+    try {
+      const result = await axios.post('https://video-conference-application-2-backend.onrender.com/login', {
+        username, password
+      }, { withCredentials: true })
+      console.log('Login successfull : ',result.data);
+      const userResponse = await axios.get('/auth/user', { withCredentials: true });
+      console.log("User  data:", userResponse.data);
       localStorage.setItem('flashMessage', result.data.message);
       window.dispatchEvent(new Event("userLoggedIn"));
       navigate('/home')
     }
-    catch(e){
+    catch (e) {
       console.log(e);
-       toast.error(e.response?.data?.message || 'Something went wrong');
+      toast.error(e.response?.data?.message || 'Something went wrong');
     }
   }
-  
+
   return (
     <div className="flex flex-col items-center">
       <div className='mb-20'>
@@ -32,16 +35,16 @@ const Login = () => {
         <form onSubmit={handleSubmit} className='flex flex-col items-center'>
           <div className='my-10 mx-10'>
             <label htmlFor="username" className='mr-10 text-2xl tracking-wide'>Username</label>
-            <input type="text" id='username' className='border px-3 py-2 border-neutral-400 rounded' onChange={(e)=>{setUsername(e.target.value)}}/>
+            <input type="text" id='username' className='border px-3 py-2 border-neutral-400 rounded' onChange={(e) => { setUsername(e.target.value) }} />
           </div>
           <div className='my-5 mx-10'>
             <label htmlFor="password" className='mr-12 tracking-wide text-2xl'>Password</label>
-            <input type="password" id='password' className='border px-3 py-2 border-neutral-400 rounded' onChange={(e)=>{setPassword(e.target.value)}}/>
+            <input type="password" id='password' className='border px-3 py-2 border-neutral-400 rounded' onChange={(e) => { setPassword(e.target.value) }} />
           </div>
           <div className=''>
             <button type='submit' className='px-3 py-2 rounded-lg bg-gradient-to-r from-orange-400 to-orange-800  tracking-wide text-2xl border-white fon border-2 mt-5' >Login</button>
           </div>
-            <p>or</p>
+          <p>or</p>
         </form>
       </div>
     </div>

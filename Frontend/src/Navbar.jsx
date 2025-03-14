@@ -6,24 +6,24 @@ import { toast } from 'react-toastify';
 const Navbar = () => {
   const [currUser, setCurrUser] = useState(null);
   const navigate = useNavigate();
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get("https://video-conference-application-2-backend.onrender.com/auth/user", {
-        withCredentials: true});
-      setCurrUser(res.data); // ✅ Set user state
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        console.warn("User not authenticated");
-        setCurrUser(null); // ✅ Make sure to set user as null
-      } else {
-        console.error("Error fetching user:", error);
-      }
-    }
-  };
+  // const fetchUser = async () => {
+  //   try {
+  //     const res = await axios.get("https://video-conference-application-2-backend.onrender.com/auth/user", {
+  //       withCredentials: true});
+  //     setCurrUser(res.data); // ✅ Set user state
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 401) {
+  //       console.warn("User not authenticated");
+  //       setCurrUser(null); // ✅ Make sure to set user as null
+  //     } else {
+  //       console.error("Error fetching user:", error);
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
 
   useEffect(() => {
     window.addEventListener("userLoggedIn", fetchUser);
