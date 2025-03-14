@@ -14,7 +14,7 @@ const Login = () => {
         username, password
       }, { withCredentials: true })
       console.log('Login successfull : ',result.data);
-      const userResponse = await axios.get('/auth/user', { withCredentials: true });
+      const userResponse = await axios.get('https://video-conference-application-2-backend.onrender.com/auth/user', { withCredentials: true });
       console.log("User  data:", userResponse.data);
       localStorage.setItem('flashMessage', result.data.message);
       window.dispatchEvent(new Event("userLoggedIn"));
