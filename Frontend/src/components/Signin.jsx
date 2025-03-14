@@ -11,9 +11,9 @@ const signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post('http://localhost:8080/signin', {
+      const result = await axios.post(`https://video-conference-application-2-backend.onrender.com`, {
         username, password
-      });
+      },{withCredentials:true});
       console.log('Response :', result.data);
       localStorage.setItem('flashMessage', result.data.message);
       navigate('/home')
@@ -46,7 +46,7 @@ const signin = () => {
               <p>Or</p>
             </div>
             <div className=''>
-              <button className='px-3 py-3 rounded-lg bg-gradient-to-r  tracking-wide text-1xl border-white fon border-2 ' onClick={() => window.location.href = "http://localhost:8080/auth/google"}><img src={gLogo} alt="" className='w-8 inline mx-2' />Sign in with Google</button>
+              <button className='px-3 py-3 rounded-lg bg-gradient-to-r  tracking-wide text-1xl border-white fon border-2 ' onClick={() => window.location.href = "https://video-conference-application-2-backend.onrender.com/auth/google"}><img src={gLogo} alt="" className='w-8 inline mx-2' />Sign in with Google</button>
             </div>
           </div>
         </form>

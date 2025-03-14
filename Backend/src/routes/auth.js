@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
-const CLIENT_URL = "http://localhost:5173/home";
+const CLIENT_URL = "https://video-conference-application-2.onrender.com/home";
 const User= require('../models/user');
 
 router.get('/user',(req,res)=>{

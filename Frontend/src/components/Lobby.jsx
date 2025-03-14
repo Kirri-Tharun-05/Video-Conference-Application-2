@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import io from "socket.io-client";
-const server_URL = 'http://localhost:8080'
+const server_URL = 'https://video-conference-application-2-backend.onrender.com'
 import redCall from '../logos/Call-red.png'
 import greenCall from '../logos/Call-green.png'
 import micOn from '../logos/micOn.png'

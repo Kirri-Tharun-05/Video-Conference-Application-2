@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     // For google.signin
     if (!localStorage.getItem('googleMessage')) {
-      axios.get("http://localhost:8080/auth/login/success", { withCredentials: true })
+      axios.get("https://video-conference-application-2-backend.onrender.com/auth/login/success", { withCredentials: true })
         .then((response) => {
           toast.success(response.data.message);
           localStorage.setItem("googleMessage", true);

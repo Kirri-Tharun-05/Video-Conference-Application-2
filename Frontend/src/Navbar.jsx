@@ -8,7 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const fetchUser = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/auth/user", {
+      const res = await axios.get("https://video-conference-application-2-backend.onrender.com/auth/user", {
         withCredentials: true, // ✅ Required for cookies
       });
       setCurrUser(res.data); // ✅ Set user state
@@ -37,7 +37,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      let result = await axios.get("http://localhost:8080/auth/logout", { withCredentials: true }); // Inform backend
+      let result = await axios.get("https://video-conference-application-2-backend.onrender.com/auth/logout", { withCredentials: true }); // Inform backend
       localStorage.removeItem("googleMessage"); // Remove stored message
       toast.success(result.data.message);
       setCurrUser(null);

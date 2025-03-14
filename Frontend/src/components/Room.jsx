@@ -12,7 +12,7 @@ function Room() {
 
   const handleClick = () => {
     if (roomID != null) {
-      axios.post('http://localhost:8080/history/addUserHistory', { meeting_code: roomID }, { withCredentials: true })
+      axios.post('https://video-conference-application-2-backend.onrender.com/history/addUserHistory', { meeting_code: roomID }, { withCredentials: true })
         .then((res) => {
           console.log(res);
           setAddHistory(false);
@@ -26,7 +26,7 @@ function Room() {
 
   // Fetch user details from session
   useEffect(() => {
-    axios.get("http://localhost:8080/api/user", { withCredentials: true }) // Send cookies with request
+    axios.get("https://video-conference-application-2-backend.onrender.com/api/user", { withCredentials: true }) // Send cookies with request
       .then((res) => setUserName(res.data.name))
       .catch(() => setUserName("Guest")); // If unauthorized, set default
   }, []);
