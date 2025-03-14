@@ -4,6 +4,8 @@ const CLIENT_URL = "https://video-conference-application-2.onrender.com/home";
 const User= require('../models/user');
 
 router.get('/user',(req,res)=>{
+  console.log('inside auth.js /user req: ',req);
+  console.log('inside auth.js /user req: ',req.user);
     if(req.user){
       console.log('inside auth.js')
       console.log(req.user);
@@ -14,6 +16,8 @@ router.get('/user',(req,res)=>{
     }
 })
 router.get("/login/success", (req, res) => {
+  console.log('inside auth req: ',req);
+  console.log('inside auth req: ',req.user);
   if (req.user) {
     res.status(200).json({
       success: true,
