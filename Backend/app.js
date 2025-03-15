@@ -51,11 +51,7 @@ const sessionOptions = ({
 });
 
 app.set("trust proxy", 1);
-app.use(async (req, res, next) => {
-  const sessionCount = await mongoose.connection.db.collection("sessions").countDocuments();
-  console.log("🛠 Active Sessions in DB:", sessionCount);
-  next();
-});
+
 app.use(
   cors({
     origin: "https://video-conference-application-2.onrender.com", // Allow only your frontend origin
