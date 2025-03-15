@@ -32,8 +32,6 @@ async function main() {
   // await mongoose.connect('mongodb://127.0.0.1:27017/videocall');
 }
 
-app.use(express.json()); // ✅ Parses JSON data
-app.use(express.urlencoded({ extended: true })); // ✅ Parses form data
 
 const sessionOptions = ({
   secret: 'videoCall',
@@ -52,15 +50,18 @@ const sessionOptions = ({
   }
 });
 
-app.use(session(sessionOptions));
-app.use(flash());
 app.use(
   cors({
     origin: "https://video-conference-application-2.onrender.com", // Allow only your frontend origin
     credentials: true,
     // methods: ["GET", "POST", "PUT", "DELETE"]
   }
-  ));
+));
+
+app.use(express.json()); // ✅ Parses JSON data
+app.use(express.urlencoded({ extended: true })); // ✅ Parses form data
+app.use(session(sessionOptions));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 // this line is to authenticate the user
@@ -125,7 +126,6 @@ app.post('/login', (req, res, next) => {
       //   secure: true,  // Use 'true' if your server uses HTTPS
       //   sameSite: "none",  // Allows cross-site cookies
       // });
-      console.log("Session after login:", req.session);
       return res.status(200).json({ message: "Successfully Logged In", user });
     });
   })(req, res, next);
