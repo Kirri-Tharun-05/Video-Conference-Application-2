@@ -120,11 +120,11 @@ app.post('/login', (req, res, next) => {
       if (err) return next(err);
       console.log("Session after login:", req.session);
       // ✅ Explicitly set the session cookie
-      res.cookie("connect.sid", req.sessionID, {
-        httpOnly: true,
-        secure: true,  // Use 'true' if your server uses HTTPS
-        sameSite: "none",  // Allows cross-site cookies
-      });
+      // res.cookie("connect.sid", req.sessionID, {
+      //   httpOnly: true,
+      //   secure: true,  // Use 'true' if your server uses HTTPS
+      //   sameSite: "none",  // Allows cross-site cookies
+      // });
       console.log("Session after login:", req.session);
       return res.status(200).json({ message: "Successfully Logged In", user });
     });
