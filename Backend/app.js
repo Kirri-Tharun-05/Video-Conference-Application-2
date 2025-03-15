@@ -9,7 +9,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const authRoute = require("./src/routes/auth.js")
 const passportSetup = require('./config/passport');
 const httpStatus = require('http-status')
-const historyRoute =require('./src/routes/history');
+const historyRoute = require('./src/routes/history');
 const { createServer } = require('http'); // Add this line
 
 const PORT = 8080;
@@ -36,7 +36,7 @@ async function main() {
 const sessionOptions = ({
   secret: 'videoCall',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URL,
     collectionName: 'sessions'
@@ -56,7 +56,7 @@ app.use(
     credentials: true,
     // methods: ["GET", "POST", "PUT", "DELETE"]
   }
-));
+  ));
 
 app.use(express.json()); // ✅ Parses JSON data
 app.use(express.urlencoded({ extended: true })); // ✅ Parses form data
@@ -71,13 +71,18 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use("/auth", authRoute);
-app.use("/history",historyRoute);
+app.use("/history", historyRoute);
 
 app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   next();
 })
-
+app.use((req, res, next) => {
+  res.on('finish', () => { // Logs response headers after request is completed
+    console.log("Response Headers:", res.getHeaders());
+  });
+  next();
+});
 
 app.get('/home', (req, res) => {
   console.log(status.NOT_FOUND);
@@ -144,14 +149,14 @@ app.get("/api/user", async (req, res) => {
   try {
     // Fetch user from database using stored user ID
     const user = await User.findById(req.session.passport.user);
-    
+
     if (!user) {
       console.log("❌ User not found in database!");
       return res.status(404).json({ message: "User not found" });
     }
 
     console.log("✅ User found:", user);
-    res.json({ name: user.username}); // Adjust according to your schema
+    res.json({ name: user.username }); // Adjust according to your schema
   } catch (error) {
     console.error("❌ Error fetching user:", error);
     res.status(500).json({ message: "Internal server error" });
